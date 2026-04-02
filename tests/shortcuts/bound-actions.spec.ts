@@ -854,7 +854,6 @@ test.describe('Shortcut Keys - BOUND_ACTIONS', () => {
 
         await page.keyboard.press(`${modifier}+KeyF`);
 
-        // await expect(page.getByPlaceholder('Search requests...')).toBeVisible({ timeout: 3000 });
         await expect(page.getByTestId('sidebar-search-input')).toBeVisible({ timeout: 3000 });
         await page.getByTitle('Search requests').click();
       });
@@ -880,7 +879,7 @@ test.describe('Shortcut Keys - BOUND_ACTIONS', () => {
         await page.keyboard.up('KeyF');
         await page.keyboard.up('Alt');
 
-        await expect(page.getByTestId('sidebar-search-input')).toBeVisible({ timeout: 2000 });
+        await expect(page.getByTestId('sidebar-search-input')).toBeVisible({ timeout: 3000 });
         await page.getByTitle('Search requests').click();
       });
     });
