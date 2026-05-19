@@ -159,7 +159,7 @@ test.describe('Shortcut Keys - BOUND_ACTIONS', () => {
         await expect(page.locator('.request-tab')).toHaveCount(2, { timeout: 3000 });
       });
 
-      test('customized Cmd/Ctrl+Shift+X closes the active tab', async ({ page, createTmpDir }) => {
+      test('customized Cmd/Ctrl+Shift+X closes the active tab ', async ({ page, createTmpDir }) => {
         // Remap closeTab to Cmd/Ctrl+Shift+X
         await openKeybindingsTab(page);
         const row = page.getByTestId(`keybinding-row-closeTab`);
