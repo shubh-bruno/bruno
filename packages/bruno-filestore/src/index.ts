@@ -170,6 +170,7 @@ export const parseDotEnv = (content: string): Record<string, string> => {
 };
 
 export { redactLargeBruTextBlocks, restoreRedactedBlocks };
+export { setNativeYmlParser } from './formats/yml/utils';
 export type { RedactedBlock, RedactionResult } from './formats/bru/utils/redact-large-text-blocks';
 export { BruParserWorker };
 export * from './types';

@@ -9,6 +9,7 @@ const onboardUser = require('../app/onboarding');
 const LastOpenedCollections = require('../store/last-opened-collections');
 const WindowStateStore = require('../store/window-state');
 const { clearAgentCache, clearPacCache } = require('@usebruno/requests');
+const { setNativeYmlParser } = require('@usebruno/filestore');
 const mockServer = require('../app/mock-server/mock-server');
 
 const registerPreferencesIpc = (mainWindow) => {
@@ -21,6 +22,7 @@ const registerPreferencesIpc = (mainWindow) => {
 
     // load preferences
     const preferences = getPreferences();
+    setNativeYmlParser(!!preferences.beta?.['native-yml-parser']);
 
     // Set the default location if it hasn't been set by the user
     if (!preferences.general?.defaultLocation || !fs.existsSync(preferences.general.defaultLocation)) {
@@ -56,6 +58,7 @@ const registerPreferencesIpc = (mainWindow) => {
     try {
       const wasMockServerEnabled = mockServer.isMockServerEnabled();
       await savePreferences(preferences);
+      setNativeYmlParser(!!preferences.beta?.['native-yml-parser']);
       if (wasMockServerEnabled && !mockServer.isMockServerEnabled()) {
         await mockServer.stopAll().catch((error) => console.error('Failed to stop mock servers', error));
       }

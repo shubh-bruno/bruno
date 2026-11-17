@@ -6,6 +6,7 @@ const { buildTree } = require('./tree-builder');
 const { defaultClassify, uidForSeed } = require('../../utils/mount');
 const { getWsClient } = require('../../ipc/network/ws-event-handlers');
 const { transientManager } = require('../transient');
+const { preferencesUtil } = require('../../store/preferences');
 
 // cold start only — collection-watcher handles live changes and writes through to the cache
 
@@ -176,6 +177,7 @@ class MountManager {
     const parsed = new Map();
     if (toParse.length > 0) {
       const pool = getPool();
+      const nativeYml = preferencesUtil.isBetaFeatureEnabled('native-yml-parser');
       await Promise.allSettled(
         toParse.map(async (e) => {
           try {
@@ -183,7 +185,8 @@ class MountManager {
               collectionPath: entry.collectionPath,
               relativePath: e.relativePath,
               format: e.format,
-              type: e.type
+              type: e.type,
+              nativeYml
             });
             parsed.set(e.relativePath, result);
           } catch (err) {

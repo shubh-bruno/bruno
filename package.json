@@ -18,7 +18,8 @@
     "packages/bruno-requests",
     "packages/bruno-filestore",
     "packages/bruno-io",
-    "packages/bruno-sqlite"
+    "packages/bruno-sqlite",
+    "packages/bruno-yaml-native"
   ],
   "homepage": "https://usebruno.com",
   "devDependencies": {
@@ -72,6 +73,7 @@
     "build:bruno-filestore": "npm run build --workspace=packages/bruno-filestore",
     "build:bruno-io": "npm run build --workspace=packages/bruno-io",
     "build:bruno-sqlite": "npm run build --workspace=packages/bruno-sqlite",
+    "build:bruno-yaml-native": "npm run build --workspace=packages/bruno-yaml-native",
     "build:bruno-converters": "npm run build --workspace=packages/bruno-converters",
     "build:bruno-query": "npm run build --workspace=packages/bruno-query",
     "build:graphql-docs": "npm run build --workspace=packages/bruno-graphql-docs",

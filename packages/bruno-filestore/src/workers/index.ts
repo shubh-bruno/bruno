@@ -1,6 +1,7 @@
 import WorkerQueue from './WorkerQueue';
 import { Lane, CollectionFormat } from '../types';
 import { DEFAULT_COLLECTION_FORMAT } from '../constants';
+import { isNativeYmlParserEnabled } from '../formats/yml/utils';
 import path from 'node:path';
 
 const sizeInMB = (size: number): number => {
@@ -69,7 +70,7 @@ class BruParserWorker {
     const workerScriptPath = path.join(__dirname, './workers/worker-script.js');
 
     return workerQueue.enqueue({
-      data: { data, format },
+      data: { data, format, nativeYml: isNativeYmlParserEnabled() },
       priority: size,
       scriptPath: workerScriptPath,
       taskType

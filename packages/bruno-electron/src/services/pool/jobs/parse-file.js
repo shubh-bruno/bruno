@@ -65,7 +65,8 @@ const parseContent = (content, format, type, byteSize) => {
   }
 };
 
-const parseFile = ({ collectionPath, relativePath, format, type }) => {
+const parseFile = ({ collectionPath, relativePath, format, type, nativeYml }) => {
+  filestore.setNativeYmlParser(!!nativeYml);
   const absolutePath = path.join(collectionPath, relativePath);
   const buf = fs.readFileSync(absolutePath);
   const stat = fs.statSync(absolutePath, { bigint: true });

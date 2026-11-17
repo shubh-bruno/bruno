@@ -78,6 +78,13 @@ const BETA_FEATURES = [
     label: 'gRPC Scripting',
     description: 'Write scripts for gRPC requests. Inspect messages, metadata, and status across the call lifecycle.',
     docsUrl: 'https://link.usebruno.com/docs/grpc-scripting'
+  },
+  {
+    id: BETA_FEATURE_IDS.NATIVE_YML_PARSER,
+    label: 'Native YAML Parser',
+    description: 'Parse .yml collections with the native rapidyaml (N-API) parser instead of the legacy JS parser. Reopen a collection to apply.',
+    toggle: true,
+    defaultEnabled: false
   }
 ];
 
@@ -211,7 +218,7 @@ const Beta = ({ close }) => {
                       size="xs"
                       isOn={formik.values[feature.id]}
                       handleToggle={() => handleToggle(feature.id)}
-                      data-testid="mock-server-beta-toggle"
+                      data-testid={`${feature.id}-beta-toggle`}
                     />
                   </div>
                 )}

@@ -1,0 +1,17 @@
+{
+  "name": "@usebruno/yaml-native",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "main": "index.js",
+  "gypfile": false,
+  "files": [
+    "index.js",
+    "binding.gyp",
+    "src"
+  ],
+  "scripts": {
+    "build": "node-gyp rebuild",
+    "clean": "node-gyp clean"
+  }
+}

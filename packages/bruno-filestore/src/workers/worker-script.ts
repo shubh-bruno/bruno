@@ -15,6 +15,7 @@ import {
   stringifyYmlFolder,
   stringifyYmlEnvironment
 } from '../formats/yml';
+import { setNativeYmlParser } from '../formats/yml/utils';
 import { CollectionFormat } from '../types';
 import { DEFAULT_COLLECTION_FORMAT } from '../constants';
 
@@ -31,6 +32,7 @@ interface WorkerMessage {
   data: {
     data: any;
     format?: CollectionFormat;
+    nativeYml?: boolean;
   };
 }
 
@@ -56,7 +58,8 @@ const runTask = (taskType: TaskType, data: any, format: CollectionFormat): any =
 parentPort?.on('message', async (message: WorkerMessage) => {
   try {
     const { taskType, data: messageData } = message;
-    const { data, format = DEFAULT_COLLECTION_FORMAT } = messageData;
+    const { data, format = DEFAULT_COLLECTION_FORMAT, nativeYml = false } = messageData;
+    setNativeYmlParser(nativeYml);
     const result = runTask(taskType, data, format);
     parentPort?.postMessage(result);
   } catch (error: any) {

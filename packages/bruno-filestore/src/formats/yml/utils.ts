@@ -33,6 +33,19 @@ export const stringifyYml = (obj: any): string => {
   return result.join('\n');
 };
 
+let nativeYmlParserEnabled = false;
+let nativeYmlParser: { parse: (text: string) => any } | null = null;
+
+export const setNativeYmlParser = (enabled: boolean): void => {
+  nativeYmlParserEnabled = enabled;
+};
+
+export const isNativeYmlParserEnabled = (): boolean => nativeYmlParserEnabled;
+
 export const parseYml = (ymlString: string): any => {
+  if (nativeYmlParserEnabled) {
+    nativeYmlParser ??= require('@usebruno/yaml-native');
+    return nativeYmlParser!.parse(ymlString);
+  }
   return YAML.parse(ymlString);
 };

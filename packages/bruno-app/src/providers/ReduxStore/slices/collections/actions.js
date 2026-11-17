@@ -3530,7 +3530,7 @@ export const loadLargeRequest
 export const mountCollection
   = ({ collectionUid, collectionPathname, brunoConfig, skipTabRestore = false, workspacePathname = null }) =>
     (dispatch, getState) => {
-      dispatch(updateCollectionMountStatus({ collectionUid, mountStatus: 'mounting' }));
+      dispatch(updateCollectionMountStatus({ collectionUid, mountStatus: 'mounting', startedAt: Date.now() }));
       const fileCacheEnabled = getState().app?.preferences?.cache?.file?.enabled;
       const channel = fileCacheEnabled ? 'renderer:mount-collection-v2' : 'renderer:mount-collection';
       return new Promise(async (resolve, reject) => {

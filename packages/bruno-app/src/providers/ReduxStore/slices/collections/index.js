@@ -300,6 +300,10 @@ export const collectionsSlice = createSlice({
       if (collection) {
         if (action.payload.mountStatus) {
           collection.mountStatus = action.payload.mountStatus;
+          if (action.payload.mountStatus === 'mounting') {
+            collection.mountStartedAt = action.payload.startedAt;
+            collection.mountDurationMs = null;
+          }
         }
       }
     },
@@ -307,6 +311,9 @@ export const collectionsSlice = createSlice({
       const collection = findCollectionByUid(state.collections, action.payload.collectionUid);
       if (collection) {
         collection.isLoading = action.payload.isLoading;
+        if (!action.payload.isLoading && collection.mountStartedAt && collection.mountDurationMs === null) {
+          collection.mountDurationMs = action.payload.timestamp - collection.mountStartedAt;
+        }
       }
     },
     setCollectionSecurityConfig: (state, action) => {
